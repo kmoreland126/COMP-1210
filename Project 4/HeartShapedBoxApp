@@ -1,0 +1,41 @@
+import java.util.Scanner;
+/**
+* Provides a terminal way to work with HeartShapedBox class.
+*
+* Project 4
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 2-8-23
+*/
+public class HeartShapedBoxApp {
+
+/**
+* Use user input information to make HeartShapedBox classes.
+*
+* @param args Command line agruments (not used).
+*/
+   public static void main(String[] args) {
+      Scanner input = new Scanner(System.in);
+      System.out.println("Enter label, radius, "
+         + "and height for a heart shaped box.");
+      System.out.print("\tlabel: ");
+      String label = input.nextLine();
+      System.out.print("\tradius: ");
+      Double radius = input.nextDouble();
+      // if radius is zero or less than zero
+      if (radius <= 0) {
+         System.out.println("Error: radius must be greater than zero.");
+         return;
+      }
+      System.out.print("\theight: ");
+      Double height = input.nextDouble();
+      if (height <= 0) {
+         System.out.println("Error: height must be greater than zero.");
+      }
+      else {
+         System.out.println("\n" 
+               + new HeartShapedBox(label, radius, height));
+      }
+         
+   }
+      
+}  
