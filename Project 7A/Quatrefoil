@@ -1,0 +1,164 @@
+import java.text.DecimalFormat;
+/**
+* A simple program measuring the parts of a quatrefoil.
+*
+* Project 7A
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 3-14-23
+*/
+public class Quatrefoil {
+
+// Instance Variables
+   private String label = "";
+   private double diameter = 0;
+   private static int count = 0;
+   
+/**
+* Quatrefoil constructor.
+* @param labelIn label for quatrefoil
+* @param diameterIn for quatrefoil
+*/
+   public Quatrefoil(String labelIn, double diameterIn) {
+      setLabel(labelIn);
+      setDiameter(diameterIn);
+      count++;
+   }
+   
+   /**
+   * Gets label for quatrefoil.
+   * @return String label.
+   */
+   public String getLabel() {
+      return label;
+   }
+   
+   /**
+   * Sets a label.
+   * @param labelIn used.
+   * @return boolean used.
+   */
+   public boolean setLabel(String labelIn) {
+      if (labelIn == null) {
+         return false;
+      }
+      else {
+         label = labelIn.trim();
+         return true;
+      }
+   }
+   
+   /**
+   * Gets the large diameter of quatrefoil.
+   * @return double used.
+   */
+   public double getDiameter() {
+      return diameter;
+   }
+   
+   /**
+   * Sets the diameter of quatrefoil.
+   * @param diameterIn used.
+   * @return boolean used.
+   */
+   public boolean setDiameter(double diameterIn) {
+      if (diameterIn < 0) {
+         return false;
+      }
+      else {
+         diameter = diameterIn;
+         return true;
+      }
+   }
+   
+   /**
+   * Finds the perimeter of quatrefoil.
+   * @return double used.
+   */
+   public double perimeter() {
+      double perimeter = Math.PI * diameter;
+      return perimeter;
+   }
+   
+   /**
+   * Finds the perimeter in terms of feet.
+   * @return double used.
+   */
+   public double perimeterInFt() {
+      double perimeterInFt = perimeter() / 12;
+      return perimeterInFt;
+   }
+   
+   /**
+   * Finds the area of quatrefoil.
+   * @return double used.
+   */
+   public double area() {
+      double area = Math.pow((diameter / 2), 2) 
+         + 2 * ((Math.PI * Math.pow((diameter / 2), 2) / 4));
+      return area;
+   }
+   
+   /**
+   * Finds the area in square feet of quatrefoil.
+   * @return double used.
+   */
+   public double areaInSqFt() {
+      double areaInSqFt = area() / 144;
+      return areaInSqFt;
+   }
+   
+   /**
+   * The toString method returns the perimeter and area as a String.
+   * @return output used.
+   */
+   public String toString() {
+      DecimalFormat df = new DecimalFormat("#,##0.0##");
+      String output = "Quatrefoil \"" + getLabel() + "\" with diameter "
+         + getDiameter() + " inches has:\n"
+         + "\tperimeter = " + df.format(perimeter()) + " inches (or "
+         + df.format(perimeterInFt()) + " feet)\n"
+         + "\tarea = " + df.format(area()) + " square inches (or "
+         + df.format(areaInSqFt()) + " square feet)";
+      return output;
+   }
+   
+   /**
+   * Finds the number of quatrefoild.
+   * @return int used.
+   */
+   public static int getCount() {
+      return count;
+   }
+   
+   /**
+   * Resets the number of quatrefoils to 0.
+   */
+   public static void resetCount() {
+      count = 0;
+   }
+   
+   /**
+   * Instance method checks to see if an object is a quatrefoil.
+   * @param obj used.
+   * @return boolean used.
+   */
+   public boolean equals(Object obj) {
+      if (!(obj instanceof Quatrefoil)) {
+         return false;
+      }
+      else {
+         Quatrefoil qf = (Quatrefoil) obj;
+         return (label.equalsIgnoreCase(qf.getLabel())
+            && Math.abs(diameter - qf.getDiameter()) < .000001);
+      }
+   }
+   
+   /**
+   * Required by checkstyle for method above.
+   * @return k used.
+   */
+   public int hashCode() {
+      return 0;
+   }
+
+}
