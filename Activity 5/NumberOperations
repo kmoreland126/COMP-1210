@@ -1,0 +1,86 @@
+/**
+* Simple program to find integers and use them.
+* 
+* Activity 5
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP 1210-001
+* @version 2-11-23
+*/
+public class NumberOperations {
+   private int number;
+   
+   /**
+   * NumberOperations constructor.
+   * @param numberIn used.
+   */
+   public NumberOperations(int numberIn) {
+      number = numberIn;
+   }
+   
+   // methods
+   /**
+   * Gets the value int.
+   *
+   * @return int.
+   */
+   public int getValue() {
+      return number;
+   }
+   
+  /**
+  * This is a String output.
+  *
+  * @return output - returns the output.
+  */
+   public String oddsUnder() {
+      String output = "";
+      int x = 0;
+      while (x < number) {
+         if (x % 2 != 0) {
+            output += x + "\t";
+         }
+         x++;
+      }
+      return output;
+   }
+  // methods
+  /**
+  * Gets the String powersTwoUnder.
+  *
+  * @return returns a string of numbers raised to a power.
+  */
+   public String powersTwoUnder() {
+      String output = "";
+      int powers = 1;
+      while (powers < number) {
+         output += powers + "\t";
+         powers = powers * 2;
+      }
+      return output;
+   }
+   // methods
+   /**
+   * Returns the integer 1.
+   * @return 1
+   * Compares the number.
+   * @param compareNumber
+   * Compares the number.
+   */
+   public int isGreater(int compareNumber) {
+      if (number > compareNumber) {
+         return 1;
+      }
+      else if (number < compareNumber) {
+         return -1;
+      }
+      else {
+         return 0;
+      }
+   }
+   /**
+   * Returns numbers.
+   * @return returns numbers.
+   */
+   public String toString() {
+      return number + "";
+   }
+}
