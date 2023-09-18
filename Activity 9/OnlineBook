@@ -1,0 +1,39 @@
+/**
+* It will inherit from OnlineTextItem and will needs to include,
+* a variable for the author's name.
+*
+* Activity 9
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 4-1-23
+*/
+public class OnlineBook extends OnlineTextItem {
+
+   // Instance variables
+   protected String author;
+   
+   /**
+   * OnlineBook constructor.
+   * @param nameIn string
+   * @param priceIn double
+   */
+   public OnlineBook(String nameIn, double priceIn) {
+      super(nameIn, priceIn);
+      author = "Author Not Listed";
+   }
+   
+   /**
+   * Sets the author of the book.
+   * @param authorIn string
+   */
+   public void setAuthor(String authorIn) {
+      author = authorIn;
+   }
+   
+   /**
+   * Overrides the toString method so authors name is listed after the book.
+   * @return string object
+   */
+   public String toString() {
+      return name + " - " + author + ": $" + calculateCost();
+   }
+}
