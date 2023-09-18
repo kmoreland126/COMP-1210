@@ -1,0 +1,64 @@
+import java.util.Scanner;
+/**
+* Simple program to convert raw time measurements in seconds 
+* and converts it to the combination of days, hours, minutes, and seconds.
+*
+* Project 2
+* @ author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 1-24-23
+*/
+public class TimeConverter {
+
+/**
+* Prints out the combination of time.
+* @param args Command line arguments - not used.
+*/
+   public static void main(String[] args) {
+      Scanner userInput = new Scanner(System.in);
+      String name = "";
+      int timeInSeconds = 0;
+      //Prompt the user for the time:
+      System.out.print("Enter the raw time measurement in seconds: ");
+      timeInSeconds = userInput.nextInt();
+      int timeInSeconds2 = timeInSeconds;
+      if (timeInSeconds < 0) { //Print of new instructions
+         System.out.println("Measurement must be non-negative!");
+      }
+      else { //calculate time in days, hours, and minutes
+         System.out.println("");
+         System.out.println("Measurement by combined days, hours, "
+            + "minutes, seconds:");
+      
+         System.out.println("\tdays: "
+            + timeInSeconds / (24 * 3600));
+         int days1 = (timeInSeconds / (24 * 3600));
+         
+         timeInSeconds = timeInSeconds % (24 * 3600);
+         int hours1 = timeInSeconds / 3600;
+         
+         timeInSeconds %= 3600;
+         int minutes1 = timeInSeconds / 60;
+         
+         timeInSeconds %= 60;
+         int seconds1 = timeInSeconds;
+         System.out.println("\thours: "
+            + (int) hours1);
+         System.out.println("\tminutes: "
+            + (int) minutes1);
+         System.out.println("\tseconds: "
+            + (int) seconds1);
+         System.out.println("");
+         System.out.print((int) timeInSeconds2
+            + " seconds = ");
+         System.out.print((int) days1
+            + " days, ");
+         System.out.print((int) hours1
+            + " hours, ");
+         System.out.print((int) minutes1
+            + " minutes, ");
+         System.out.print((int) seconds1
+            + " seconds");
+      }
+      
+   }
+}
