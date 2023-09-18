@@ -1,0 +1,240 @@
+import java.text.DecimalFormat;
+/**
+* Simple program stores the name of the list and an array of Quatrefoil objects.
+* 
+* Project 8
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 3-27-23
+*/
+public class QuatrefoilList {
+
+// Instance Variables
+   private String name;
+   private Quatrefoil[] list;
+   private int obj = 0;
+   
+/**
+* QuatrefoilList constructor.
+* @param nameIn Name of Quatrefoil
+* @param listIn the array of Quatrefoil
+* @param objIn the numnber of Quatrefoil in the array
+*/
+   public QuatrefoilList(String nameIn, Quatrefoil[] listIn, int objIn) {
+      name = nameIn;
+      list = listIn;
+      obj = objIn;
+   }
+   
+   /**
+   * Returns name of the list.
+   * @return name String
+   */
+   public String getName() {
+      return name;
+   }
+   
+   /**
+   * Returns the number of Quatrefoils.
+   * @return obj number
+   */
+   public int numberOfQuatrefoils() {
+      return obj;
+   }
+   
+   /**
+   * Returns the diameter for all Quatrefoil objects.
+   * @return total double total
+   */
+   public double totalDiameters() {
+      double total = 0;
+      for (int i = 0; i < obj; i++) {
+         total += list[i].getDiameter();
+      }
+      return total;
+   }
+   
+   /**
+   * Returns the perimeter for all Quatrefoil objects.
+   * @return total double total
+   */
+   public double totalPerimeters() {
+      double total = 0;
+      for (int i = 0; i < obj; i++) {
+         total += list[i].perimeter();
+      }
+      return total;
+   }
+   
+   /**
+   * Returns the area for all Quatrefoil objects.
+   * @return total double total
+   */
+   public double totalAreas() {
+      double total = 0;
+      for (int i = 0; i < obj; i++) {
+         total += list[i].area();
+      }
+      return total;
+   }
+   
+   /**
+   * Returns the average diameter for all Quatrefoil objects.
+   * @return total double average
+   */
+   public double averageDiameter() {
+      double total = 0;
+      if (obj <= 0) {
+         return total;
+      }
+      for (int i = 0; i < obj; i++) {
+         total += list[i].getDiameter();
+      }
+      total /= obj;
+      return total;
+   }
+   
+   /**
+   * Returns the average perimeter for all Quatrefoil objects.
+   * @return total double average
+   */
+   public double averagePerimeter() {
+      double total = 0;
+      if (obj <= 0) {
+         return total;
+      }
+      for (int i = 0; i < obj; i++) {
+         total += list[i].perimeter();
+      }
+      total /= obj;
+      return total;
+   }
+   
+   /**
+   * Returns the average area for all Quatrefoil objects.
+   * @return total double average
+   */
+   public double averageArea() {
+      double total = 0;
+      if (obj <= 0) {
+         return total;
+      }
+      for (int i = 0; i < obj; i++) {
+         total += list[i].area();
+      }
+      total /= obj;
+      return total;
+   }
+   
+   /**
+   * Returns a string of a summary of values found.
+   * @return output string
+   */
+   public String toString() {
+      DecimalFormat df = new DecimalFormat("#,##0.0##");
+      String output = ""
+         + "----- Summary for " + name + " -----"
+         + "\nNumber of Quatrefoils: " + obj
+         + "\nTotal Diameters: " + df.format(totalDiameters())
+         + " inches"
+         + "\nTotal Perimeters: " + df.format(totalPerimeters())
+         + " inches"
+         + "\nTotal Areas: " + df.format(totalAreas())
+         + " square inches"
+         + "\nAverage Diameter: " + df.format(averageDiameter())
+         + " inches"
+         + "\nAverage Perimeter: " + df.format(averagePerimeter())
+         + " inches"
+         + "\nAverage Area: " + df.format(averageArea())
+         + " square inches";
+      return output;
+   }
+   
+   /**
+   * Returns the array of Quatrefoil objects.
+   * @return list array
+   */
+   public Quatrefoil[] getList() {
+      return list;
+   }
+   
+   /**
+   * Adds a new Quatrefoil object to QuatrefoilList.
+   * @param labelIn String
+   * @param diameterIn double
+   */
+   public void addQuatrefoil(String labelIn, double diameterIn) {
+      Quatrefoil addedQ = new Quatrefoil(labelIn, diameterIn);
+      list[obj] = addedQ;
+      obj++;
+   }
+   
+   /**
+   * Finds the measurements of a certain Quatrefoil.
+   * @param labelIn String
+   * @return list String
+   */
+   public Quatrefoil findQuatrefoil(String labelIn) {
+      for (int i = 0; i < obj; i++) {
+         if (list[i].getLabel().equalsIgnoreCase(labelIn)) {
+            return list[i];
+         }
+      }
+      return null;
+   }
+   
+   /**
+   * Deletes a Quatrefoil object from QuatrefoilList.
+   * @param labelIn String
+   * @return true if deleted or false if not
+   */
+   public Quatrefoil deleteQuatrefoil(String labelIn) {
+      for (int i = 0; i < obj; i++) {
+         if (list[i].getLabel().equalsIgnoreCase(labelIn)) {
+            Quatrefoil deletedQ = list[i];
+            for (int j = i; j < obj - 1; j++) {
+               list[j] = list[j + 1];
+            }
+            list[obj - 1] = null;
+            obj--;
+            return deletedQ;
+         }
+      }
+      return null;
+   }
+   
+   /**
+   * Edits an existing Quatrefoil with input.
+   * @param labelIn string
+   * @param diameterIn double
+   * @return true if edit or false if not
+   */
+   public boolean editQuatrefoil(String labelIn, double diameterIn) {
+      boolean result = false;
+      for (int i = 0; i < obj; i++) {
+         if (list[i].getLabel().equalsIgnoreCase(labelIn)) {
+            list[i].setDiameter(diameterIn);
+            result = true;
+         }
+      }
+      return result;
+   }
+   
+   /**
+   * Finds the Quatrefoil with the largest diameter.
+   * @return largestQ double
+   */
+   public Quatrefoil findQuatrefoilWithLargestDiameter() {
+      if (obj <= 0) {
+         return null;
+      }
+      double largest = list[0].getDiameter();
+      Quatrefoil largestQ = list[0];
+      for (int i = 0; i < obj; i++) {
+         if (list[i].getDiameter() > largest) {
+            largestQ = new Quatrefoil(list[i].getLabel(),
+               list[i].getDiameter());
+         }
+      }
+      return largestQ;
+   }
+}
