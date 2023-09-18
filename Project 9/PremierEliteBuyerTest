@@ -1,0 +1,128 @@
+import org.junit.Assert;
+//import static org.junit.Assert.*;
+//import org.junit.Before;
+import org.junit.Test;
+
+/**
+* EliteBuyer Test.
+*
+* Project 9
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 4-5-23
+*/
+public class PremierEliteBuyerTest {
+      
+      /** Acct method test. */
+   @Test public void acctNumberTest() {
+      PremierEliteBuyer peb = new PremierEliteBuyer("10003", "King Kelly");
+      peb.setAcctNumber("12345");
+      Assert.assertEquals("Get Acct #", "12345", peb.getAcctNumber());
+   }
+   
+   /** Name method test. */
+   @Test public void nameTest() {
+      PremierEliteBuyer peb = new PremierEliteBuyer("10003", "King Kelly");
+      peb.setName("Moreland Kate");
+      Assert.assertEquals("Get Name", "Moreland Kate", peb.getName());
+   }
+   
+   /** Purchases methods. */
+   @Test public void purchasesTest() {
+      double[] testPurchases = {34.5, 100.0};
+      PremierEliteBuyer peb = new PremierEliteBuyer("10003", "King, Kelly");
+      
+      peb.setPurchases(34.5, 100.0);
+      Assert.assertEquals("purchases array", peb.purchases, peb.getPurchases());
+      Assert.assertEquals("Total purchases", 114.325, peb.calcSubtotal(),
+          0.001);
+      
+      peb.addPurchases(63.50, 300.0);
+      Assert.assertEquals("add purchases", peb.purchases, peb.getPurchases());
+      Assert.assertEquals("Total purchases", 423.3, peb.calcSubtotal(), 0.001);
+      
+      peb.deletePurchase(63.50);
+      Assert.assertEquals("delete purchase", peb.purchases, peb.getPurchases());
+      Assert.assertEquals("Total purchases", 369.325, peb.calcSubtotal(),
+          0.001);
+      
+      peb.deletePurchases(34.5, 300.0);
+      Assert.assertEquals("delete purchases", peb.purchases,
+          peb.getPurchases());
+      Assert.assertEquals("total purchases", 85, peb.calcSubtotal(), 0.0001);
+   }
+   
+   /** calcSubtotal method. */
+   @Test public void calcSubtotalTest() {
+      PremierEliteBuyer peb = new PremierEliteBuyer("10003", "King, Kelly");
+      peb.setPurchases(34.5, 100.0);
+      Assert.assertEquals("calcSubtotal test", 114.325, peb.calcSubtotal(),
+         0.0001);
+   }
+   
+   /** calcTotal method. */
+   @Test public void calcTotalTest() {
+      PremierEliteBuyer peb = new PremierEliteBuyer("10003", "King, Kelly");
+      peb.setPurchases(34.5, 100.0);
+      Assert.assertEquals("calcTotal test", 123.471,
+         peb.calcTotal(), 0.0001);
+   }
+   
+   /** calcAwardPoints method. */
+   @Test public void calcAwardPointsTest() {
+      PremierEliteBuyer peb = new PremierEliteBuyer("10003", "King, Kelly");
+      peb.setPurchases(34.5, 100.0);
+      Assert.assertEquals("Award points test", 2280, peb.calcAwardPoints());
+      peb.addPurchases(1);
+      Assert.assertEquals("Award points test", 2300, peb.calcAwardPoints());
+      PremierEliteBuyer peb2 = new PremierEliteBuyer("10004",
+         "Jenkins, Jordan");
+      peb2.setPurchases(34.5, 100.0, 63.50, 300.0, 100.0);
+      Assert.assertEquals("Award points test", 11160, peb2.calcAwardPoints());
+   }
+   
+   
+   /** toString method. */
+   @Test public void toStringTest() {
+      PremierEliteBuyer peb = new PremierEliteBuyer("10003", "King, Kelly");
+      peb.addPurchases(34.5, 100.0, 63.50, 300.0);
+      Assert.assertEquals("String test", true, peb.toString().contains(
+         "Premier Elite Buyer\nAcctNo/Name: 10003 King, Kelly"
+         + "\nSubtotal: $423.30"
+         + "\nTax: $33.86"
+         + "\nTotal: $457.16"
+         + "\nAward Points: 8460"
+         + "\n(includes 0.15 discount rate applied to Subtotal)"));
+      PremierEliteBuyer peb2 = new PremierEliteBuyer("10004",
+         "Jenkins, Jordan");
+      peb2.addPurchases(34.5, 100.0, 63.50, 300.0, 100.0);
+      Assert.assertEquals("String test", true, peb2.toString().contains(
+         "Premier Elite Buyer\nAcctNo/Name: 10004 Jenkins, Jordan"
+         + "\nSubtotal: $508.30"
+         + "\nTax: $40.66"
+         + "\nTotal: $548.96"
+         + "\nAward Points: 11160"
+         + "\n(includes 0.15 discount rate applied to Subtotal)"
+         + "\n(includes 1000 bonus points added to Award Points)"));
+   }
+   
+   /** Bonus Points test. */
+   @Test public void bonuscalcAwardPointsTest() {
+      PremierEliteBuyer peb = new PremierEliteBuyer("10004",
+         "Jenkins, Jordan");
+      Assert.assertEquals("bonus test", 1000, peb.getBonusAwardPoints());
+      peb.setBonusAwardPoints(30000);
+      Assert.assertEquals("bonus test 2", 30000, peb.getBonusAwardPoints());
+   }
+
+   /** Fixture initialization (common initialization
+    *  for all tests).
+   @Before public void setUp() {
+   } */
+
+
+   /** A test that always fails. 
+   @Test public void defaultTest() {
+      Assert.assertEquals("Default test added by jGRASP. Delete "
+            + "this test once you have added your own.", 0, 1);
+   }*/
+}
