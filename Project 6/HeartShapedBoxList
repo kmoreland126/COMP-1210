@@ -1,0 +1,246 @@
+import java.util.ArrayList;
+import java.text.DecimalFormat;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+/**
+* Basic program that stores the name and list of HeartShapedBox objects.
+*
+* Project 6
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 2-22-23
+*/
+public class HeartShapedBoxList {
+
+// Fields - Instance Variables
+   private String listName = "";
+   private ArrayList<HeartShapedBox> list
+      = new ArrayList<HeartShapedBox>();
+      
+/**
+* Constructor for HeartShapedBoxList.
+*
+* @param listNameIn - used
+* @param listIn - used
+*/
+   public HeartShapedBoxList(String listNameIn,
+      ArrayList<HeartShapedBox> listIn) {
+      listName = listNameIn;
+      list = listIn;
+   }
+
+// methods
+/**
+* Gets the name string.
+*
+* @return String
+*/
+   public String getName() {
+      return listName;
+   }
+   
+/**
+* Gets the number of HeartShapedBoxes.
+*
+* @return int
+*/
+   public int numberOfHeartShapedBoxes() {
+      if (list.size() == 0) {
+         int listNumber = 0;
+         return listNumber;
+      }
+      else {
+         int listNumber = list.size();
+         return listNumber;
+      }
+   }
+
+/**
+* Gets the total surface area.
+*
+* @return double
+*/
+   public double grandTotalSurfaceArea() {
+      int index = 0;
+      double totalsurfacearea = 0.0;
+      while (index < list.size()) {
+         totalsurfacearea += list.get(index).totalSurfaceArea();
+         index++;
+      }
+      return totalsurfacearea;
+   }
+   
+   /**
+   * Gets the total volume.
+   *
+   * @return double
+   */
+   public double totalVolume() {
+      int index = 0;
+      double totalV = 0.0;
+      while (index < list.size()) {
+         totalV += list.get(index).volume();
+         index++;
+      }
+      return totalV;
+   }
+   
+   /**
+   * Finds the average surface area.
+   *
+   * @return double
+   */
+   public double averageTotalSurfaceArea() {
+      double avgSurfaceArea = 0.0;
+      if (list.size() != 0) {
+         avgSurfaceArea = grandTotalSurfaceArea() / list.size();
+      }
+      return avgSurfaceArea;
+   }
+
+/**
+* Finds the average volume.
+*
+* @return double
+*/
+   public double averageVolume() {
+      double avgVolume = 0.0;
+      if (list.size() != 0) {
+         avgVolume = totalVolume() / list.size();
+      }
+      return avgVolume;
+   }
+   
+   /**
+   * Creates a string.
+   *
+   * @return String created string
+   */
+   public String toString() {
+      String output = "";
+      int index = 0;
+      output = "--- " + getName() + " ---" + "\n";
+      while (index < list.size()) {
+         output += ("\n" + list.get(index) + "\n");
+         index++;
+      }
+      return output;
+   }
+   
+   /**
+   * Creates summary info.
+   *
+   * @return String summary info
+   */
+   public String summaryInfo() {
+      DecimalFormat df = new DecimalFormat("#,##0.0##");
+      String output = "";
+      output += "----- Summary for " + getName() + " -----";
+      output += "\nNumber of HeartShapedBoxes: " + list.size();
+      output += "\nTotal Surface Area: " + df.format(grandTotalSurfaceArea())
+         + " square units";
+      output += "\nTotal Volume: " + df.format(totalVolume())
+         + " cubic units";
+      output += "\nAverage Surface Area: "
+         + df.format(averageTotalSurfaceArea()) + " square units";
+      output += "\nAverage Volume: " + df.format(averageVolume())
+         + " cubic units";
+      return output;
+   }
+   
+   /** 
+   * Returns array list.
+   * @return list ArrayList
+   */
+   public ArrayList<HeartShapedBox> getList() {
+      return list;
+   }
+   
+   /**
+   * Reads file and creates a HeartShapedBoxList.
+   * @param fileName - used
+   * @throws FileNotFoundException - used
+   * @return HeartShapedBoxList created list
+   */
+   public HeartShapedBoxList readFile(String fileName)
+      throws FileNotFoundException {
+      Scanner fileScan = new Scanner(new File(fileName));
+      String newListName;
+      ArrayList<HeartShapedBox> newList = new ArrayList<HeartShapedBox>();
+      newListName = fileScan.nextLine();
+      while (fileScan.hasNext()) {
+         String name = "";
+         while (fileScan.hasNextLine() && !fileScan.hasNextDouble()) {
+            name += fileScan.nextLine();
+         }
+         name = name.trim();
+         double radius = fileScan.nextDouble();
+         double height = fileScan.nextDouble();
+         HeartShapedBox hsb = new HeartShapedBox(name, radius, height);
+         newList.add(hsb);
+      }
+      fileScan.close();
+      HeartShapedBoxList newHSBList
+         = new HeartShapedBoxList(newListName, newList);
+      return newHSBList;
+   }
+   
+   /**
+   * Adds a new HeartShapedBox object.
+   * @param labelIn - used
+   * @param radiusIn - used
+   * @param heightIn - used
+   */
+   public void addHeartShapedBox(String labelIn, double radiusIn,
+      double heightIn) {
+      HeartShapedBox hsb = new HeartShapedBox(labelIn, radiusIn, heightIn);
+      list.add(hsb);
+   }
+   
+   /**
+   * Finds HeartShapedBox from list.
+   * @param labelIn - used
+   * @return HeartShapedBox found object
+   */
+   public HeartShapedBox findHeartShapedBox(String labelIn) {
+      for (HeartShapedBox hsb : getList()) {
+         if (hsb.getLabel().equalsIgnoreCase(labelIn)) {
+            return hsb;
+         }
+      }
+      return null;
+   }
+   
+   /**
+   * Deletes HeartShapedBox from list.
+   * @param labelIn - used
+   * @return HeartShapedBox deleted object
+   */
+   public HeartShapedBox deleteHeartShapedBox(String labelIn) {
+      if (findHeartShapedBox(labelIn) != null) {
+         HeartShapedBox deleted = findHeartShapedBox(labelIn);
+         list.remove(findHeartShapedBox(labelIn));
+         return deleted;
+      }
+      else {
+         return null;
+      }
+   }
+   
+   /**
+   * Edits HeartShapedBox from list.
+   * @param labelIn - used
+   * @param radiusIn - used
+   * @param heightIn - used
+   * @return boolean if edit was completed
+   */
+   public boolean editHeartShapedBox(String labelIn, double radiusIn,
+      double heightIn) {
+      if (findHeartShapedBox(labelIn) != null) {
+         findHeartShapedBox(labelIn).setRadius(radiusIn);
+         findHeartShapedBox(labelIn).setHeight(heightIn);
+         return true;
+      }
+      return false;
+   }
+}
