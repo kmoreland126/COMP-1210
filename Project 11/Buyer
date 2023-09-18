@@ -1,0 +1,178 @@
+import java.util.Arrays;
+import java.text.DecimalFormat;
+/**
+* Simple program to create methods for Buyers.
+*
+* Project 11
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 4-17-23
+*/
+public abstract class Buyer implements Comparable<Buyer> {
+
+   // Instance variables
+   protected String category;
+   protected String acctNumber;
+   protected String name;
+   protected double[] purchases;
+   /**
+   * Constant sales tax rate.
+   */
+   public static final double SALES_TAX_RATE = 0.08;
+   
+   /**
+   * Buyer constructor.
+   * @param acctNumberIn string
+   * @param nameIn string
+   */
+   public Buyer(String acctNumberIn, String nameIn) {
+      acctNumber = acctNumberIn;
+      name = nameIn;
+      purchases = new double[0];
+   }
+   
+   /**
+   * Gets the acctNumber.
+   * @return acctNumber string
+   */
+   protected String getAcctNumber() {
+      return acctNumber;
+   }
+   
+   /**
+   * Sets the acctNumber.
+   * @param acctNumberIn string
+   */
+   protected void setAcctNumber(String acctNumberIn) {
+      acctNumber = acctNumberIn;
+   }
+   
+   /**
+   * Gets the name.
+   * @return name string
+   */
+   protected String getName() {
+      return name;
+   }
+   
+   /**
+   * Sets the name.
+   * @param nameIn string
+   */
+   protected void setName(String nameIn) {
+      name = nameIn;
+   }
+   
+   /**
+   * Gets the purchases.
+   * @return purchases double[]
+   */
+   protected double[] getPurchases() {
+      return purchases;
+   }
+   
+   /**
+   * Sets the purchases.
+   * @param purchasesIn double[]
+   */
+   protected void setPurchases(double... purchasesIn) {
+      purchases = Arrays.copyOf(purchases, purchasesIn.length);
+      for (int i = 0; i < purchasesIn.length; i++) {
+         purchases[i] = purchasesIn[i];
+      }
+   }
+   
+   /**
+   * Method to add purchases.
+   * @param newPurchases double
+   */
+   protected void addPurchases(double... newPurchases) {
+      int l = purchases.length;
+      int n = newPurchases.length;
+      purchases = Arrays.copyOf(purchases, l + n);
+      for (int i = 0; i < n; i++) {
+         purchases[l + i] = newPurchases[i];
+      }
+   }
+   
+   /**
+   * Method to delete 1 purchase.
+   * @param deletedPurchase double
+   */
+   protected void deletePurchase(double deletedPurchase) {
+      int l = purchases.length;
+      for (int i = 0; i < l; i++) {
+         if (deletedPurchase == purchases[i]) {
+            while (i < l - 1) {
+               purchases[i] = purchases[i + 1];
+               i++;
+            }
+            purchases[l - 1] = 0.0;
+            purchases = Arrays.copyOf(purchases, l - 1);
+         }
+      }
+   }
+   
+   /**
+   * Method to delete more than 1 purchase.
+   * @param deletedPurchases double
+   */
+   protected void deletePurchases(double... deletedPurchases) {
+      int l = purchases.length;
+      int d = deletedPurchases.length;
+      for (int i = 0; i < l; i++) {
+         for (int j = 0; j < d; j++) {
+            deletePurchase(deletedPurchases[j]);
+         }
+      }
+   }
+   
+   /**
+   * Method to calculcate subtotal rate.
+   * @return subtotal double
+   */
+   protected double calcSubtotal() {
+      double subtotal = 0;
+      int l = purchases.length;
+      for (int i = 0; i < l; i++) {
+         subtotal += purchases[i];
+      }
+      return subtotal;
+   }
+   
+   /**
+   * Method to calculate total including sales tax.
+   * @return total double
+   */
+   protected double calcTotal() {
+      return (calcSubtotal() * SALES_TAX_RATE) + calcSubtotal();
+   }
+   
+   /**
+   * Method to return purchase points of cards.
+   * @return int
+   */
+   protected abstract int calcAwardPoints();
+   
+   /**
+   * Method to create basic toString method.
+   * @return String value info
+   */
+   public String toString() {
+      DecimalFormat df = new DecimalFormat("$#,##0.00");
+      return category
+         + "\nAcctNo/Name: " + acctNumber + " " + name
+         + "\nSubtotal: " + df.format(calcSubtotal())
+         + "\nTax: " + df.format(calcSubtotal() * SALES_TAX_RATE)
+         + "\nTotal: " + df.format(calcTotal())
+         + "\nAward Points: " + calcAwardPoints();
+   }
+   
+   /**
+   * Compare method for comparing two accounts by name.
+   * @return returns -1 for "before", 0 for =, 1 for "after"
+   * @param obj2 object
+   */
+   public int compareTo(Buyer obj2) {
+      return name.compareToIgnoreCase(obj2.getName());
+   }
+}
