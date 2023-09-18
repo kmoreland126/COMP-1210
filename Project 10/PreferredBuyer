@@ -1,0 +1,29 @@
+/**
+* Simple program to make objects of this class receive one award point,
+* per dollar spent.
+*
+* Project 10
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 4-11-23
+*/
+public class PreferredBuyer extends Buyer {
+
+   /**
+   * Preferred Buyer constructor.
+   * @param acctNumberIn string
+   * @param nameIn string
+   */
+   public PreferredBuyer(String acctNumberIn, String nameIn) {
+      super(acctNumberIn, nameIn);
+      category = "Preferred Buyer";
+   }
+   
+   /**
+   * Overrides the abstract method from Buyer.
+   * @return int value for every dollar spent
+   */
+   protected int calcAwardPoints() {
+      int points = (int) Math.floor(calcSubtotal());
+      return points;
+   }
+}
