@@ -1,0 +1,80 @@
+import java.util.Scanner;
+import java.text.DecimalFormat;
+import java.util.Random;
+/**
+* Simple program to provide information about the hotel bill code.
+* 
+* Project 3
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 2-1-23
+*/
+public class HotelBill {
+/**
+* Prints out hotel bill information.
+* @param args Command line arguments - not used.
+*/
+   public static void main(String[] args) {
+      Scanner userInput = new Scanner(System.in);
+      //Promtps the user for the value of the bill
+      System.out.print("Enter hotel bill code: ");
+      String str = userInput.nextLine();
+      
+      if (str.length() < 22) {
+      //Prints out Invalid Hotel Bill Code
+         System.out.println("\nInvalid Hotel Bill Code.");
+         System.out.print("Hotel Bill Code must have at least 22 characters.");
+         System.out.print("\n");
+      }
+      else {
+      //Generate a random class
+         Random rand = new Random();
+      //Trim the string
+         String n = str.trim();
+      //Find the first 3 numbers in the string
+         String room = n.substring(0, 3);
+      //Find the price for the room
+         String price = n.substring(3, 9);
+         double price1 = Double.parseDouble(price);
+         double tax = price1 * 0.15;
+         double total = (price1 * 0.15) + (price1);
+      //Find the date of check-in
+         String date = n.substring(9, 19);
+      //Find the nights stayed
+         String nights = n.substring(19, 21);
+      //Find the name of guest
+         String name = n.substring(21, n.length());
+      //Find total price of the trip
+         int nights1 = Integer.parseInt(nights);
+      //Lucky Number
+         int randint = rand.nextInt(1000000);
+      //Total Cost
+         double cost = (price1 * 1.15 * nights1);
+       //Decimal Format
+         String decimal = "$#,##0.00";
+         DecimalFormat df = new DecimalFormat(decimal);
+         String decimal1 = "000000";
+         DecimalFormat df1 = new DecimalFormat(decimal1);
+      //Output
+         System.out.println("\nName: "
+            + name);
+         System.out.println("Room: "
+            + room);
+         System.out.println("Check-in Date: "
+            + date);
+         System.out.println("Nights: "
+            + nights1);
+         System.out.print("Cost Per Night: "
+            + df.format(total));
+         System.out.print("   (Room: $"
+            + price);
+         System.out.println("   Tax: "
+            + df.format(tax)
+            + ")");
+         System.out.println("Total: "
+            + df.format(cost));
+         System.out.print("Lucky Number: "
+            + df1.format(randint));
+         System.out.print("\n");
+      }
+   }
+}
