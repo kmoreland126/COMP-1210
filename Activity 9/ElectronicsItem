@@ -1,0 +1,36 @@
+/**
+* Simple program the inherits all of the characteristics of Inventory items,
+* and will take into account shipping costs.
+*
+* Activity 9
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 4-1-23
+*/
+public class ElectronicsItem extends InventoryItem {
+
+   // Instance variables
+   protected double weight = 0;
+   /**
+   * Makes the shipping cost a constant.
+   */
+   public static final double SHIPPING_COST = 1.5;
+   
+   /**
+   * Electronics item constructor.
+   * @param nameIn string
+   * @param priceIn double
+   * @param weightIn double
+   */
+   public ElectronicsItem(String nameIn, double priceIn, double weightIn) {
+      super(nameIn, priceIn);
+      weight = weightIn;
+   }
+   
+   /**
+   * Overrides the calculateCost method to tkae into account shipping.
+   * @return super.calculateCost() double
+   */
+   public double calculateCost() {
+      return super.calculateCost() + (SHIPPING_COST * weight);
+   }
+}
