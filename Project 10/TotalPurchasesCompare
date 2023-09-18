@@ -1,0 +1,29 @@
+import java.util.Comparator;
+/**
+* Program to define the ordering from highest to lowest based,
+* on the toal purchases.
+*
+* Project 10
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 4-12-23
+*/
+public class TotalPurchasesCompare implements Comparator<Buyer> {
+
+   /**
+   * Constructor total purchases compare.
+   * @param b1 first buyer
+   * @param b2 second buyer
+   * @return int
+   */
+   public int compare(Buyer b1, Buyer b2) {
+      if (b1.calcTotal() > b2.calcTotal()) {
+         return -1;
+      }
+      else if (b1.calcTotal() < b2.calcTotal()) {
+         return 1;
+      }
+      else {
+         return 0;
+      }
+   }
+}
