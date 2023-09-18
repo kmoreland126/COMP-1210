@@ -1,0 +1,147 @@
+import java.util.ArrayList;
+import java.text.DecimalFormat;
+/**
+* Basic program that stores the name and list of HeartShapedBox objects.
+*
+* Project 5
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 2-14-23
+*/
+public class HeartShapedBoxList {
+
+// Fields - Instance Variables
+   private String listName = "";
+   private ArrayList<HeartShapedBox> list
+      = new ArrayList<HeartShapedBox>();
+      
+/**
+* Constructor for HeartShapedBoxList.
+*
+* @param listNameIn - used
+* @param listIn - used
+*/
+   public HeartShapedBoxList(String listNameIn,
+      ArrayList<HeartShapedBox> listIn) {
+      listName = listNameIn;
+      list = listIn;
+   }
+
+// methods
+/**
+* Gets the name string.
+*
+* @return String
+*/
+   public String getName() {
+      return listName;
+   }
+   
+/**
+* Gets the number of HeartShapedBoxes.
+*
+* @return int
+*/
+   public int numberOfHeartShapedBoxes() {
+      if (list.size() == 0) {
+         int listNumber = 0;
+         return listNumber;
+      }
+      else {
+         int listNumber = list.size();
+         return listNumber;
+      }
+   }
+
+/**
+* Gets the total surface area.
+*
+* @return double
+*/
+   public double grandTotalSurfaceArea() {
+      int index = 0;
+      double totalsurfacearea = 0.0;
+      while (index < list.size()) {
+         totalsurfacearea += list.get(index).totalSurfaceArea();
+         index++;
+      }
+      return totalsurfacearea;
+   }
+   
+   /**
+   * Gets the total volume.
+   *
+   * @return double
+   */
+   public double totalVolume() {
+      int index = 0;
+      double totalV = 0.0;
+      while (index < list.size()) {
+         totalV += list.get(index).volume();
+         index++;
+      }
+      return totalV;
+   }
+   
+   /**
+   * Finds the average surface area.
+   *
+   * @return double
+   */
+   public double averageTotalSurfaceArea() {
+      double avgSurfaceArea = 0.0;
+      if (list.size() != 0) {
+         avgSurfaceArea = grandTotalSurfaceArea() / list.size();
+      }
+      return avgSurfaceArea;
+   }
+
+/**
+* Finds the average volume.
+*
+* @return double
+*/
+   public double averageVolume() {
+      double avgVolume = 0.0;
+      if (list.size() != 0) {
+         avgVolume = totalVolume() / list.size();
+      }
+      return avgVolume;
+   }
+   
+   /**
+   * Creates a string.
+   *
+   * @return String created string
+   */
+   public String toString() {
+      String output = "";
+      int index = 0;
+      output = "----- " + getName() + " -----" + "\n\n";
+      while (index < list.size()) {
+         output += (list.get(index) + "\n\n");
+         index++;
+      }
+      return output;
+   }
+   
+   /**
+   * Creates summary info.
+   *
+   * @return String summary info
+   */
+   public String summaryInfo() {
+      DecimalFormat df = new DecimalFormat("#,##0.0##");
+      String output = "";
+      output += "----- Summary for " + getName() + " -----";
+      output += "\nNumber of HeartShapedBoxes: " + list.size();
+      output += "\nTotal Surface Area: " + df.format(grandTotalSurfaceArea())
+         + " square units";
+      output += "\nTotal Volume: " + df.format(totalVolume())
+         + " cubic units";
+      output += "\nAverage Surface Area: "
+         + df.format(averageTotalSurfaceArea()) + " square units";
+      output += "\nAverage Volume: " + df.format(averageVolume())
+         + " cubic units";
+      return output;
+   }
+}
