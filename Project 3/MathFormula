@@ -1,0 +1,56 @@
+import java.util.Scanner;
+import java.text.DecimalFormat;
+/**
+* Simple program to solve a given equation with different variables.
+*
+* Project 3
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 1-31-23
+*/
+public class MathFormula {
+  /**
+   * Prints out equation and variables.
+   * @param args Command line arguments - not used.
+   */
+   public static void main(String[] args) {
+      Scanner userInput = new Scanner(System.in);
+      String name = "";
+      double x = 0;
+      //Prompt the user for the value of x
+      System.out.print("Enter a value for x: ");
+      x = userInput.nextDouble();
+      //Solves the equation
+      double b = 9;
+      double a = Math.pow(x, b) + 10;
+     
+      double c = 3;
+      double d = 2;
+      double m = Math.abs(5 * (Math.pow(x, c)) - (3 * (Math.pow(x, d))));
+      
+      double e = 6;
+      double f = Math.pow(x, e);
+      double g = Math.pow(x, d);
+      double n = Math.sqrt((4 * f) - (2 * g) + 1);
+      double result = (a) / (m + n);
+      
+      //Converting Double data to String data
+      String number = Double.toString(result);
+      
+      int left = number.indexOf('.');
+      int right = number.length() - left - 1;
+      
+      //Decimal Format
+      String decimal = "#,##0.0##";
+      DecimalFormat df = new DecimalFormat(decimal);
+      
+      //Output
+      System.out.println("Result: "
+         + (double) result);
+      System.out.println("# digits to left of decimal point: "
+         + left);
+      System.out.println("# digits to right of decimal point: "
+         + right);
+      System.out.print("Formatted Result: "
+         + df.format(result));
+   }   
+}
