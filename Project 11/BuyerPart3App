@@ -1,0 +1,36 @@
+import java.io.FileNotFoundException;
+/**
+* Buyers app part 3 that prints out the Buyers in order.
+*
+* Project 11
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 4-18-23
+*/
+public class BuyerPart3App {
+
+   /**
+   * Main method.
+   * @param args used for writing in file name.
+   */
+   public static void main(String[] args) {
+      if (args.length == 0) {	
+         System.out.println("File name expected as command line argument."  	
+                + "\nProgram ending.");
+      }
+      else {
+         BuyerProcessor bp = new BuyerProcessor();
+         try {
+            bp.readBuyerFile(args[0]); 
+         }
+         catch (FileNotFoundException e) {
+            System.out.println("Attempted to read files: " + args[0]
+               + " (No such file or directory)\nProgram ending.");
+            return;
+         }
+         System.out.println(bp.generateReport());
+         System.out.println(bp.generateReportByName());
+         System.out.println(bp.generateReportByTotalPurchases());
+         System.out.println(bp.generateInvalidRecordsReport());
+      }
+   } 	
+}
