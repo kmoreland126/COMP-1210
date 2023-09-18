@@ -1,0 +1,271 @@
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.Before;
+
+/**
+* Simple test that tests QuatrefoilList and all of its methods.
+*
+* Project 8
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 3-28-23
+*/
+public class QuatrefoilListTest {
+   
+   /** Fixture initialization (common initialization
+   * for all tests). **/
+   @Before public void setUp() {
+   }
+   
+   /**
+   * Returns a sample array for use.
+   * @return sample array
+   */
+   private Quatrefoil[] getSample() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      Quatrefoil[] array = {ex1, ex2, ex3};
+      return array;
+   }
+   
+   /** Tests get Name method. */
+   @Test public void getNameTest() {
+      Quatrefoil q = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil[] quat = {q};
+      QuatrefoilList ex1 = new QuatrefoilList("Test", quat, 1);
+      Assert.assertEquals("Test", ex1.getName());
+   }
+   
+   /** Tests number of Quatrefoils method. */
+   @Test public void numberOfQuatrefoilsTest() {
+      Quatrefoil q = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil[] quat = {q};
+      QuatrefoilList ex1 = new QuatrefoilList("Test", quat, 1);
+      Assert.assertEquals(1, ex1.numberOfQuatrefoils(), 0.0001);
+   }
+   
+   /** Tests the total diameter method. */
+   @Test public void totalDiametersTest() {
+      Quatrefoil q = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil[] quat = {q};
+      QuatrefoilList ex1 = new QuatrefoilList("Test", quat, 1);  	
+      Assert.assertEquals(3.5, ex1.totalDiameters(), 0.0001);
+   }
+   
+   /** Tests the total diameter if the objects are less than 0. */
+   @Test public void totalDiametersTest2() {
+      Quatrefoil[] qArray = new Quatrefoil[10];
+      QuatrefoilList qList = new QuatrefoilList("Test List", qArray, 0);
+      Assert.assertEquals("totalDiametersTest2 failed", 0.0,
+         qList.totalDiameters(), 0.0001);	
+   }
+            
+   /** Tests the total perimeter method. */
+   @Test public void totalPerimetersTest() {
+      Quatrefoil q = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil[] quat = {q};
+      QuatrefoilList ex1 = new QuatrefoilList("Test", quat, 1);
+      Assert.assertEquals(10.995574287564276, ex1.totalPerimeters(), 0.0001);
+   }
+   
+    /** Tests the total perimeter if the objects are less than 0. */
+   @Test public void totalPerimetersTest2() {
+      Quatrefoil[] qArray = new Quatrefoil[10];
+      QuatrefoilList qList = new QuatrefoilList("Test List", qArray, 0);
+      Assert.assertEquals("totalPerimetersTest2 failed", 0.0,
+         qList.totalPerimeters(), 0.0001);	  	
+   }
+   
+   /** Tests the total area method. */
+   @Test public void totalAreasTest() {
+      Quatrefoil q = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil[] quat = {q};
+      QuatrefoilList ex1 = new QuatrefoilList("Test", quat, 1);
+      Assert.assertEquals(7.873, ex1.totalAreas(), 0.0001);
+   }
+   
+    /** Tests the total area if the objects are less than 0. */
+   @Test public void totalAreasTest2() {
+      Quatrefoil[] qArray = new Quatrefoil[10];
+      QuatrefoilList qList = new QuatrefoilList("Test List", qArray, 0);
+      Assert.assertEquals("totalAreasTest2 failed", 0.0,
+         qList.totalAreas(), 0.0001);	 	
+   }
+   
+   /** Tests the average diameter method. */
+   @Test public void averageDiameterTest() {
+      QuatrefoilList exList = new QuatrefoilList("Examples", getSample(), 3);
+      Assert.assertEquals(51.11333333333334, exList.averageDiameter(), 0.0001);
+   }
+   
+   /** Tests the average diameter method with 0 objects. */
+   @Test public void averageDiameterTest2() {
+      Quatrefoil[] qArray = new Quatrefoil[10];
+      QuatrefoilList qList = new QuatrefoilList("Test List", qArray, 0);
+      Assert.assertEquals("averageDiameterTest2 failed", 0.0,
+         qList.averageDiameter(), 0.0001);
+   }
+   
+   /** Tests the average perimeter method. */
+   @Test public void averagePerimeterTest() {
+      QuatrefoilList exList = new QuatrefoilList("Examples", getSample(), 3);
+      Assert.assertEquals(160.5772725004863, exList.averagePerimeter(), 0.0001);
+   }
+   
+   /** Tests the average perimeter method with 0 objects. */
+   @Test public void averagePerimeterTest2() {
+      Quatrefoil[] qArray = new Quatrefoil[10];
+      QuatrefoilList qList = new QuatrefoilList("Test List", qArray, 0);
+      Assert.assertEquals("averagePerimeterTest2 failed", 0.0,
+         qList.averagePerimeter(), 0.0001);
+   }
+   
+   /** Tests the average area method. */
+   @Test public void averageAreaTest() {
+      QuatrefoilList exList = new QuatrefoilList("Examples", getSample(), 3);
+      Assert.assertEquals(2977.805572491963, exList.averageArea(), 0.0001);
+   }
+   
+   /** Tests the average area method with 0 objects. */
+   @Test public void averageAreaTest2() {
+      Quatrefoil[] qArray = new Quatrefoil[10];
+      QuatrefoilList qList = new QuatrefoilList("Test List", qArray, 0);
+      Assert.assertEquals("averageAreaTest2 failed", 0.0,
+         qList.averageArea(), 0.0001);
+   }
+   
+   /** Tests the to string method. */
+   @Test public void toStringTest() {
+      QuatrefoilList exList = new QuatrefoilList("Examples", getSample(), 3);
+      Assert.assertTrue(exList.toString().contains(
+         "----- Summary for Examples -----"));
+   }
+   
+   /** Tests the get list method. */
+   @Test public void getListTest() {
+      QuatrefoilList exList = new QuatrefoilList("Examples", getSample(), 3);
+      Assert.assertArrayEquals(getSample(), exList.getList());
+   }
+   
+   /** Tests the add quatrefoil method. */
+   @Test public void addQuatrefoilTest() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      Quatrefoil[] exs = {ex1, ex2, ex3, null};
+      QuatrefoilList exList = new QuatrefoilList("Examples", exs, 3);
+      Quatrefoil addEx = new Quatrefoil("Add Example", 6.20);
+      exList.addQuatrefoil("Add Example", 6.20);
+      Assert.assertEquals(addEx, exs[3]);
+   }
+   
+   /** Tests the find quatrefoil method. */
+   @Test public void findQuatrefoilTest() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      Quatrefoil[] exs = {ex1, ex2, ex3};
+      QuatrefoilList exList = new QuatrefoilList("Examples", exs, 3);
+      Assert.assertEquals(exs[0], exList.findQuatrefoil("Small Example"));
+   }
+   
+   /** Tests the find quatrefoil method for ex2. */
+   @Test public void findQuatrefoilTest2() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      Quatrefoil[] exs = {ex1, ex2, ex3};
+      QuatrefoilList exList = new QuatrefoilList("Examples", exs, 3);
+      Assert.assertEquals(exs[1], exList.findQuatrefoil("Medium Example"));
+   }
+   
+   /** Tests the find quatrefoil method for ex3. */
+   @Test public void findQuatrefoilTest3() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      Quatrefoil[] exs = {ex1, ex2, ex3};
+      QuatrefoilList exList = new QuatrefoilList("Examples", exs, 3);
+      Assert.assertEquals(exs[2], exList.findQuatrefoil("Large Example"));
+   }
+   
+   /** Tests the find quatrefoil method for null. */
+   @Test public void findQuatrefoilTest4() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      Quatrefoil[] exs = {ex1, ex2, ex3};
+      QuatrefoilList exList = new QuatrefoilList("Examples", exs, 3);
+      Assert.assertEquals(null, exList.findQuatrefoil("N/A"));
+   }
+   
+   /** Tests the delete quatrefoil method. */
+   @Test public void deleteQuatrefoilTest() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      Quatrefoil[] exs = {ex1, ex2, ex3};
+      QuatrefoilList exList = new QuatrefoilList("Examples", exs, 3);
+      Assert.assertEquals(exs[1], exList.deleteQuatrefoil("Medium Example"));
+   }
+   
+   /** Tests the delete quatrefoil method for a null. */
+   @Test public void deleteQuatrefoilTest2() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      Quatrefoil[] exs = {ex1, ex2, ex3};
+      QuatrefoilList exList = new QuatrefoilList("Examples", exs, 0);
+      Assert.assertEquals(null, exList.deleteQuatrefoil("N/A"));
+   }
+   
+   /** Tests the edit quatrefoil method. */
+   @Test public void editQuatrefoilTest() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      Quatrefoil[] exs = {ex1, ex2, ex3};
+      QuatrefoilList exList = new QuatrefoilList("Examples", exs, 3);
+      Assert.assertEquals(true, exList.editQuatrefoil("Small Example", 2.0));
+   }
+   
+   /** Tests the edit quatrefoil method if none exist. */
+   @Test public void editQuatrefoilTest2() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      Quatrefoil[] exs = {ex1, ex2, ex3};
+      QuatrefoilList exList = new QuatrefoilList("Examples", exs, 3);
+      Assert.assertEquals(false, exList.editQuatrefoil("N/A", 0.0));
+   }
+   
+   /** Tests the find quatrefoil with largest diameter method if it is false.*/
+   @Test public void findQuatrefoilWithLargestDiameterTest() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      Quatrefoil[] exs = {ex1, ex2, ex3};
+      QuatrefoilList exList = new QuatrefoilList("Examples1", exs, 0);
+      Assert.assertEquals(null, exList.findQuatrefoilWithLargestDiameter());
+   }
+   
+   /** Tests the find quatrefoil with largest diameter method if it is true. */
+   @Test public void findQuatrefoilWithLargestDiameterTest2() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      Quatrefoil[] exs = {ex1, ex2, ex3};
+      QuatrefoilList exList = new QuatrefoilList("Examples", exs, 3);
+      Assert.assertEquals(exs[2], exList.findQuatrefoilWithLargestDiameter());
+   }
+   
+   /** Tests the find quatrefoil with the largest diameter method if it is 0.*/
+   @Test public void findQuatrefoilWithLargestDiameterTest3() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      Quatrefoil[] exs = {ex1, ex2, ex3};
+      QuatrefoilList exList = new QuatrefoilList("Examples", exs, 3);
+      Assert.assertEquals(exs[2], exList.findQuatrefoilWithLargestDiameter());
+   }
+}
