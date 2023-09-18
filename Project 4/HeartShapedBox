@@ -1,0 +1,173 @@
+import java.text.DecimalFormat;
+ /**  	
+ * Simple program to calculate the area and volume of a heart.  	
+ *  	
+ * Project 4  	
+ * @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001  	
+ * @version 2-8-23	  	
+ */
+public class HeartShapedBox {	  	
+ 	
+ // Fields - Instance Variables	  	
+   private String label = "";
+   private double radius = 0;
+   private double height = 0;
+    
+    /**  	
+    * HeartShapedBox constructor. 	
+    * @param labelIn used.
+    * @param radiusIn used.
+    * @param heightIn used.
+    */
+   public HeartShapedBox(String labelIn, double radiusIn, 
+      double heightIn) {  	
+      setLabel(labelIn);
+      setRadius(radiusIn);
+      setHeight(heightIn);
+   }
+      	
+    // methods  	
+    /**
+    * Gets the label string. 	
+    *
+    * @return String.  	
+    */
+   public String getLabel() {  	
+      return label;
+   }
+      	
+    /**  	
+    * Sets the label of the heart. 	
+    *
+    * @param labelIn the label  	
+    * @return boolean returns true if the label text was set.
+    */
+   public boolean setLabel(String labelIn) {  	
+      if (labelIn != null) {
+         label = labelIn.trim();
+         return true;
+      }
+      else {	
+         return false;
+      }
+   }	
+      	
+    /**  	
+    * Returns the radius of the HeartShapedBox. 	
+    *
+    * @return double radius  	
+    */
+   public double getRadius() {  	
+      return radius;
+   }
+      	
+    /**  	
+    * Sets the radius of the Heartbox. 	
+    *
+    * @param radiusIn the radius, must be positive  	
+    * @return boolean returns true if the radius was set
+    */	  	
+   public boolean setRadius(double radiusIn) {  	
+      if (radiusIn >= 0) {
+         radius = radiusIn;
+         return true;
+      }
+      else {	
+         return false;
+      }
+   }	
+   
+    /**
+    * Returns the height of the HeartShapedBox.
+    *
+    * @return double height
+    */
+   public double getHeight() {
+      return height;
+   }  
+   	
+    /**  	
+    * Sets the height of the HeartBox. 	
+    *
+    * @param heightIn height length, must be positive  	
+    * @return boolean returns true if the height value was set
+    */	  	
+   public boolean setHeight(double heightIn) {  	
+      if (heightIn >= 0) {
+         height = heightIn;
+         return true;
+      }
+      else {	
+         return false;
+      }
+   }
+   
+   /**
+   * Returns the area of the heart of the HeartBox.
+   *
+   * @return double heart area
+   */
+   public double heartShapedArea() {
+      double heartShapedArea = (Math.PI * Math.pow(radius, 2))
+         + (4 * Math.pow(radius, 2));
+      return heartShapedArea;
+   }
+   
+   /**
+   * Returns the lateral area of the HeartBox.
+   *
+   * @return double lateral area
+   */
+   public double lateralSurfaceArea() {
+      double lateralSurfaceArea = height * ((4 * radius)
+         + (2 * Math.PI * radius));
+      return lateralSurfaceArea;
+   }
+      	
+    /**  	
+    * Returns the surface area of the HeartBox. 	
+    *
+    * @return double surface area  	
+    */
+   public double totalSurfaceArea() {  	
+      double heartShapedArea = (Math.PI * Math.pow(radius, 2)) 
+          + (4 * Math.pow(radius, 2));
+      double lateralSurfaceArea = height * ((4 * radius)
+           + (2 * Math.PI * radius));
+      double totalSurfaceArea = (2 * heartShapedArea) + lateralSurfaceArea;
+      return totalSurfaceArea;
+   }
+      	
+    /**	  	
+    * Returns the volume of the HeartBox. 	
+    *
+    * @return double the volume  	
+    */
+   public double volume() {  	
+      double heartShapedArea = (Math.PI * Math.pow(radius, 2))
+          + (4 * Math.pow(radius, 2));
+      double volume = height * heartShapedArea;
+      return volume;
+   }
+   /**
+   * Output.
+   *
+   * @return output - returns the set output in the given structure.
+   */
+   public String toString() {
+      DecimalFormat df = new DecimalFormat("#,##0.0##");
+      String output = "HeartShapedBox \"" + label.trim() 
+         + "\" with radius " + df.format(radius)
+         + " units" + " and height "
+         + df.format(height) + " units:\n";
+      output += "\theart shaped area = " + df.format(heartShapedArea())
+         + " square units\n";
+      output += "\tlateral surface area = " + df.format(lateralSurfaceArea())
+         + " square units\n";
+      output += "\ttotal surface area = " + df.format(totalSurfaceArea())
+         + " square units\n";
+      output += "\tvolume = " + df.format(volume())
+         + " cubic units";
+      return output;
+   }
+}
