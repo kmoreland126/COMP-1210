@@ -1,0 +1,82 @@
+import java.util.ArrayList;
+/**
+* Simple program that holds a set of integer representing temperatures.
+*
+* @author Kate Moreland - Fundamentals of Computing 1 - 1210-001
+* @version 2-19-23
+*/
+public class Temperatures {
+
+// Fields- Instance Variables
+   private ArrayList<Integer> temperatures;
+   
+   /**
+   * Array List Temperatures.
+   * @param temperaturesIn the temperatures
+   */
+   public Temperatures(ArrayList<Integer> temperaturesIn) {
+      temperatures = temperaturesIn;
+   }
+   
+   /**
+   * Lowest temperature value.
+   * @return returns the lowest temperature value.
+   */
+   public int getLowTemp() {
+      if (temperatures.isEmpty()) {
+         return 0;
+      }
+      int low = temperatures.get(0);
+      for (int i = 0; i < temperatures.size(); i++) {
+         if (temperatures.get(i) < low) {
+            low = temperatures.get(i);
+         }
+      }
+      return low;
+   }
+   
+   /**
+   * Hightest temperature value.
+   * @return returns the hightest temperature value.
+   */
+   public int getHighTemp() {
+      if (temperatures.isEmpty()) {
+         return 0;
+      }
+      int high = temperatures.get(0);
+      for (Integer temp : temperatures) {
+         if (temp > high) {
+            high = temp;
+         }
+      }
+      return high;
+   }
+   
+   /**
+   * Integer Lower Minimum.
+   * @return return lowerMinimum
+   * @param lowIn input for a temp
+   */
+   public int lowerMinimum(int lowIn) {
+      return lowIn < getLowTemp() ? lowIn : getLowTemp();
+   }
+   
+   /**
+   * Integer Higher Maximum.
+   * @return return higherMaximum
+   * @param highIn inout for a temp
+   */
+   public int higherMaximum(int highIn) {
+      return highIn > getHighTemp() ? highIn : getHighTemp();
+   }
+   
+   /**
+   * String toString.
+   * @return returns the above methods in readable format
+   */
+   public String toString() {
+      return "\tTemperatures: " + temperatures
+         + "\n\tLow: " + getLowTemp()
+         + "\n\tHigh: " + getHighTemp();
+   }
+}
