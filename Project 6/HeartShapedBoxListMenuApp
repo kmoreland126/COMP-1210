@@ -1,0 +1,127 @@
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.ArrayList;
+/**
+* Simple program to work with HeartShapedBoxList.
+*
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 2/22/23
+*/
+public class HeartShapedBoxListMenuApp {
+   /**
+   * Gives user option of what they want to see.
+   * @param args not used
+   * @throws FileNotFoundException in case a file is not found
+   */
+   public static void main(String[] args) throws FileNotFoundException {
+      Scanner keyboard = new Scanner(System.in);
+      ArrayList<HeartShapedBox> list = new ArrayList<HeartShapedBox>();
+      HeartShapedBoxList hsbl = new HeartShapedBoxList("", list);
+      String menu = "";
+      menu += "HeartShapedBox List System Menu\n";
+      menu += "R - Read File and Create HeartShapedBox List\n";
+      menu += "P - Print HeartShapedBox List\n";
+      menu += "S - Print Summary\n";
+      menu += "A - Add HeartShapedBox\n";
+      menu += "D - Delete HeartShapedBox\n";
+      menu += "F - Find HeartShapedBox\n";
+      menu += "E - Edit HeartShapedBox\n";
+      menu += "Q - Quit";
+      System.out.println(menu);
+      
+      char code = 'Q';   
+      do {
+         System.out.print("Enter Code [R, P, S, A, D, F, E, or Q]: ");
+         code = keyboard.nextLine().charAt(0);
+         code = Character.toUpperCase(code);
+         switch (code) {
+            case 'R':
+               String file = "";
+               System.out.print("\tFile name: ");
+               file = keyboard.nextLine();
+               hsbl = hsbl.readFile(file);
+               System.out.println("\tFile read in and"
+                  + " HeartShapedBox List created");
+               break;
+               
+            case 'P':
+               System.out.print("\n" + hsbl);
+               break;
+               
+            case 'S':
+               System.out.println("\n" + hsbl.summaryInfo());
+               break;
+               
+            case 'A':
+               String addLabel = "";
+               double addRadius = 0.0;
+               double addHeight = 0.0;
+               System.out.print("\tLabel: ");
+               addLabel = keyboard.nextLine().trim();
+               System.out.print("\tRadius: ");
+               addRadius = Double.parseDouble(keyboard.nextLine());
+               System.out.print("\tHeight: ");
+               addHeight = Double.parseDouble(keyboard.nextLine());
+               hsbl.addHeartShapedBox(addLabel, addRadius, addHeight);
+               System.out.println("\t*** HeartShapedBox added ***");
+               break;
+               
+            case 'D':
+               String deleteLabel = "";
+               System.out.print("\tLabel: ");
+               deleteLabel = keyboard.nextLine().trim();
+               if (hsbl.findHeartShapedBox(deleteLabel) == null) {
+                  System.out.print("\t\"" + deleteLabel + "\" not found\n");
+               }
+               else {
+                  System.out.println("\t\""
+                     + hsbl.findHeartShapedBox(deleteLabel).getLabel()
+                     + "\" deleted");
+                  hsbl.deleteHeartShapedBox(deleteLabel);
+               }
+               break;
+               
+            case 'F':
+               String findLabel = "";
+               System.out.print("\tLabel: ");
+               findLabel = keyboard.nextLine().trim();
+               if (hsbl.findHeartShapedBox(findLabel) != null) {
+                  System.out.println(hsbl.findHeartShapedBox(findLabel));
+               }
+               else {
+                  System.out.println("\t\"" + findLabel + "\" not found");
+               }
+               break;
+               
+            case 'E':
+               String editLabel = "";
+               double editRadius = 0.0;
+               double editHeight = 0.0;
+               System.out.print("\tLabel: ");
+               editLabel = keyboard.nextLine().trim();
+               System.out.print("\tRadius: ");
+               editRadius = Double.parseDouble(keyboard.nextLine());
+               System.out.print("\tHeight: ");
+               editHeight = Double.parseDouble(keyboard.nextLine());
+               if (hsbl.findHeartShapedBox(editLabel) != null) {
+                  hsbl.editHeartShapedBox(editLabel, editRadius, editHeight);
+                  System.out.println("\t\""
+                     + editLabel.substring(0, 1).toUpperCase()
+                     + editLabel.substring(1)
+                     + "\" successfully edited");
+               }
+               else {
+                  System.out.println("\t\"" + editLabel + "\" not found");
+               }
+               break;
+               
+            case 'Q': case 'q':
+               break;
+               
+            default:
+               System.out.println("\t*** invalid code ***");
+         }
+         System.out.print("\n");
+      } while (code != 'Q');
+   }
+}
