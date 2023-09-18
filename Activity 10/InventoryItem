@@ -1,0 +1,56 @@
+/**
+* Simple program that represnets an inventory item in a store.
+*
+* Activity 10
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 4-10-23
+*/
+public class InventoryItem {
+
+   // Instance Variables
+   protected String name;
+   protected double price;
+   private static double taxRate = 0;
+   
+   /**
+   * InventoryItem constructor.
+   * @param nameIn String
+   * @param priceIn double
+   */
+   public InventoryItem(String nameIn, double priceIn) {
+      name = nameIn;
+      price = priceIn;
+   }
+   
+   /**
+   * Returns the customer name.
+   * @return name
+   */
+   public String getName() {
+      return name;
+   }
+   
+   /**
+   * Returns the price including tax.
+   * @return returns the total cost
+   */
+   public double calculateCost() {
+      return price * (1 + taxRate);
+   }
+   
+   /**
+   * Sets the tax rate.
+   * @param taxRateIn new tax rate
+   */
+   public static void setTaxRate(double taxRateIn) {
+      taxRate = taxRateIn;
+   }
+   
+   /**
+   * Returns a String representation with name and price with tax.
+   * @return string representation of item
+   */
+   public String toString() {
+      return name + ": $" + calculateCost();
+   }
+}
