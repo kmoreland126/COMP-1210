@@ -1,0 +1,72 @@
+import java.text.DecimalFormat;
+
+/**
+* Program so an object of the class will receieve 10 award points per dollar,
+* and 5% discount on subtotal.
+*
+* Project 9
+* @author Kate Moreland - Fundamentals of COmputing 1 - COMP1210-001
+* @version 4-5-23
+*/
+public class EliteBuyer extends Buyer {
+
+   // Instance variable
+   protected double discountRate = 0.05;
+   
+   /**
+   * EliteBuyer constructor.
+   * @param acctNumberIn string
+   * @param nameIn string
+   */
+   public EliteBuyer(String acctNumberIn, String nameIn) {
+      super(acctNumberIn, nameIn);
+      category = "Elite Buyer";
+   }
+   
+   /**
+   * Method to get the discount rate.
+   * @return double
+   */
+   protected double getDiscountRate() {
+      return discountRate;
+   }
+   
+   /**
+   * Method to set the discount rate.
+   * @param rateIn double
+   */
+   protected void setDiscountRate(double rateIn) {
+      discountRate = rateIn;
+   }
+   
+   /**
+   * Method to determine award points.
+   * @return int points * 10
+   */
+   protected int calcAwardPoints() {
+      int points = (int) Math.floor(calcSubtotal());
+      points *= 10;
+      return points;
+   }
+   
+   /**
+   * Overrides inherited method to include discount.
+   * @return double
+   */
+   protected double calcSubtotal() {
+      double total = 0;
+      total = super.calcSubtotal() * (1.0 - discountRate);
+      return total;
+   }
+   
+   /**
+   * Overrides inherited method to include discount.
+   * @return string
+   */
+   public String toString() {
+      DecimalFormat df = new DecimalFormat("$#,##0.00");
+      return super.toString()
+         + "\n(includes " + discountRate + " discount rate applied to "
+         + "Subtotal)";
+   }
+}
