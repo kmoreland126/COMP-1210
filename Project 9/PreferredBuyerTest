@@ -1,0 +1,97 @@
+import org.junit.Assert;
+//import static org.junit.Assert.*;
+//import org.junit.Before;
+import org.junit.Test;
+
+/**
+* PreferredBuyer Test.
+*
+* Project 9
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 4-5-23
+*/
+public class PreferredBuyerTest {
+
+   /** Acct method test. */
+   @Test public void acctNumberTest() {
+      PreferredBuyer pb = new PreferredBuyer("10001", "Smith, Sam");
+      pb.setAcctNumber("12345");
+      Assert.assertEquals("Get Acct #", "12345", pb.getAcctNumber());
+   }
+   
+   /** Name method test. */
+   @Test public void nameTest() {
+      PreferredBuyer pb = new PreferredBuyer("10001", "Smith, Sam");
+      pb.setName("Moreland, Kate");
+      Assert.assertEquals("Get Name", "Moreland, Kate", pb.getName());
+   }
+   
+   /** Purchases methods. */
+   @Test public void purchasesTest() {
+      double[] testPurchases = {34.5, 100.0};
+      PreferredBuyer pb = new PreferredBuyer("10001", "Smith, Sam");
+      
+      pb.setPurchases(34.5, 100.0);
+      Assert.assertEquals("purchases array", pb.purchases, pb.getPurchases());
+      Assert.assertEquals("Total purchases", 134.5, pb.calcSubtotal(), 0.001);
+      
+      pb.addPurchases(63.50, 350.0);
+      Assert.assertEquals("add purchases", pb.purchases, pb.getPurchases());
+      Assert.assertEquals("Total purchases", 548, pb.calcSubtotal(), 0.001);
+      
+      pb.deletePurchase(63.50);
+      Assert.assertEquals("delete purchase", pb.purchases, pb.getPurchases());
+      Assert.assertEquals("Total purchases", 484.5, pb.calcSubtotal(), 0.001);
+      
+      pb.deletePurchases(34.5, 350.0);
+      Assert.assertEquals("delete purchases", pb.purchases, pb.getPurchases());
+      Assert.assertEquals("total purchases", 100.0, pb.calcSubtotal(), 0.0001);
+   }
+   
+   /** calcSubtotal method. */
+   @Test public void calcSubtotalTest() {
+      PreferredBuyer pb = new PreferredBuyer("10001", "Smith, Sam");
+      pb.setPurchases(34.5, 100.0);
+      Assert.assertEquals("calcSubtotal test", 134.5, pb.calcSubtotal(),
+         0.0001);
+   }
+   
+   /** calcTotal method. */
+   @Test public void calcTotalTest() {
+      PreferredBuyer pb = new PreferredBuyer("10001", "Smith, Sam");
+      pb.setPurchases(34.5, 100.0);
+      Assert.assertEquals("calcTotal test", ((134.5 * 0.08) + 134.5),
+         pb.calcTotal(), 0.0001);
+   }
+   
+   /** calcAwardPoints method. */
+   @Test public void calcAwardPointsTest() {
+      PreferredBuyer pb = new PreferredBuyer("10001", "Smith, Sam");
+      pb.setPurchases(34.5, 100.0);
+      Assert.assertEquals("Award points test", 134, pb.calcAwardPoints());
+      pb.addPurchases(1);
+      Assert.assertEquals("Award points test", 135, pb.calcAwardPoints());
+   }
+   
+   /** toString method. */
+   @Test public void toStringTest() {
+      PreferredBuyer pb = new PreferredBuyer("10001", "Smith, Sam");
+      pb.addPurchases(34.5, 100.0, 63.50, 350.0);
+      Assert.assertEquals("String test", true, pb.toString().contains(
+         "Preferred Buyer\nAcctNo/Name: 10001 Smith, Sam"
+         + "\nSubtotal: $548.00"
+         + "\nTax: $43.84"
+         + "\nTotal: $591.84"
+         + "\nAward Points: 548"));
+   }
+
+   /** Fixture initialization (common initialization
+    *  for all tests).
+   @Before public void setUp() {
+   } */
+ /** A test that always fails.
+   @Test public void defaultTest() {
+      Assert.assertEquals("Default test added by jGRASP. Delete "
+            + "this test once you have added your own.", 0, 1);
+   } */
+}
