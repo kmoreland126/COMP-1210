@@ -1,0 +1,28 @@
+/**
+*Simple program outlining long, medium, and short term goals.
+*
+*Project 1
+*@author Kate Moreland - Fundamentals of Computing 1 - 001
+*@version 1-17-23
+*/
+public class MyLifeGoals
+{
+/**
+   *Prints out goals.
+   *@param args Command line arguments - not used.
+   */
+   public static void main(String[] args)
+   {
+      System.out.println("Kate Moreland");
+      System.out.println("");
+      System.out.println("My short-term life goal is to make it to all "
+         + "of my classes this semester. Last semester I slept through a "
+         + "lot of my classes and I don't want to do that again.");
+      System.out.println("My medium-term life goal is to figure out "
+         + "my career. I have finally narrowed down a major but now "
+         + "I want to figure out all of my options.");
+      System.out.println("My long-term life goal is to be happy and "
+         + "fulfilled in my life. I think that enjoying your life is "
+         + "one of the most important things.");
+   }
+}
