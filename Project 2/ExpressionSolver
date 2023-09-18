@@ -1,0 +1,44 @@
+import java.util.Scanner;
+/**
+* Simple program to display the value of a function with certain variables.
+*
+* Project 2
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 1-23-23
+*/
+public class ExpressionSolver {
+
+/**
+* Prints value of equation with variables.
+* @param args Command line arguments - not used.
+*/
+   public static void main(String[] args) 
+   {
+      System.out.println("result = (7.1x + 3.6) (5.0y + 4.9) "
+         + "(2.5z - 5.2) / xyz");
+      Scanner userInput = new Scanner(System.in);
+      String name = "";
+      double x = 0;
+      double y = 0;
+      double z = 0;
+   //Prompt the user for the value of x:
+      System.out.print("\tEnter x: ");
+      x = userInput.nextDouble();
+   //Prompt the user for the value of y:
+      System.out.print("\tEnter y: ");
+      y = userInput.nextDouble();
+   //Prompt the user for the value of z:
+      System.out.print("\tEnter z: ");
+      z = userInput.nextDouble();
+      if (x * y * z == 0) { //function is undefined
+         System.out.println("result is undefined");
+      }
+      else { //calculate function
+         double answer2 = ((7.1 * x + 3.6) * (5.0 * y + 4.9) * (2.5 * z - 5.2));
+         double answer3 = (answer2) / (x * y * z);
+         System.out.print("result = "
+            + answer3);
+      }
+            
+   }
+}
