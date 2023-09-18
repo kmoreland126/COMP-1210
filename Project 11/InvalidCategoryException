@@ -1,0 +1,17 @@
+/**
+* Subclass for exception.
+* 
+* Project 11
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 4-18-23
+*/
+public class InvalidCategoryException extends Exception {
+
+   /**
+   * Invalid Category Exception constructor.
+   * @param category String
+   */
+   public InvalidCategoryException(String category) { 
+      super("For category: " + "\"" + category + "\"");
+   }
+}
