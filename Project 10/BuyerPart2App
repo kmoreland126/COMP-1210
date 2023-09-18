@@ -1,0 +1,32 @@
+import java.io.FileNotFoundException;
+/**
+* Class that contains the main method.
+*
+* Project 10
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 4-13-23
+*/
+public class BuyerPart2App {
+
+   /**
+   * Main method.
+   * @param args used for writing in file name
+   * @throws FileNotFoundException for files
+   */
+   public static void main(String[] args) throws FileNotFoundException {
+      String fileName = null;
+      if (args.length > 0) {
+         fileName = args[0];
+      } else {
+         System.out.println("File name expected as command line argument."
+            + "\nProgram ending.");
+      }
+      BuyerProcessor bp = new BuyerProcessor();
+      if (fileName != null) {
+         bp.readBuyerFile(fileName);
+         System.out.println(bp.generateReport());
+         System.out.println(bp.generateReportByName());
+         System.out.println(bp.generateReportByTotalPurchases());
+      }
+   }
+}
