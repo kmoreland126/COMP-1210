@@ -1,0 +1,31 @@
+/**
+* A electronic text that keeps track of word count in addition,
+* to everything that is done by OnlineTestItem and InventoryItem.
+*
+* Activity 10
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 4-10-23
+*/
+public class OnlineArticle extends OnlineTextItem {
+
+   // Instance variables
+   private int wordCount;
+   
+   /**
+   * OnlineArticle constructor.
+   * @param nameIn string
+   * @param priceIn double
+   */
+   public OnlineArticle(String nameIn, double priceIn) {
+      super(nameIn, priceIn);
+      wordCount = 0;
+   }
+   
+   /**
+   * Sets the wordCount variable.
+   * @param wordCountIn int
+   */
+   public void setWordCount(int wordCountIn) {
+      wordCount = wordCountIn;
+   }
+}
