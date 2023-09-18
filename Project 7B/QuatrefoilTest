@@ -1,0 +1,145 @@
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import java.util.ArrayList;
+
+/**
+* A simple program that tests the Quatrefoil tests.
+*
+* Project 7B
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 3-21-23
+*/
+public class QuatrefoilTest {
+
+
+   /** Fixture initialization (common initialization
+    *  for all tests). **/
+   @Before public void setUp() {
+   }
+   
+    /** Tests get label method. */
+   @Test public void getLabelTest() {
+      Quatrefoil ex = new Quatrefoil("Example", 3.5);
+      ex.getLabel();
+      Assert.assertEquals("Failed to getLabel", "Example", ex.getLabel());
+   }
+   
+   /** Tests set label method with a non-null entry. */
+   @Test public void setLabelNonNullTest() {
+      Quatrefoil ex = new Quatrefoil("Example", 3.5);
+      ex.setLabel("New");
+      Assert.assertEquals("Failed to setLabel - non-null", true,
+         ex.setLabel("New"));
+   }
+   
+    /** Tests set label method with a null entry. */
+   @Test public void setLabelNullTest() {
+      Quatrefoil ex = new Quatrefoil("Example", 3.5);
+      ex.setLabel(null);
+      Assert.assertEquals("Failed to setLabel - null",
+         false, ex.setLabel(null));
+   }
+   
+   /** Tests get diameter method. */
+   @Test public void getDiameterTest() {
+      Quatrefoil ex = new Quatrefoil("Example", 3.5);
+      ex.getDiameter();
+      Assert.assertEquals("Failed to getDiameter", 3.5,
+         ex.getDiameter(), 0.000001);
+   }
+   
+   /** Tests set diameter method with a non-negative entry. */
+   @Test public void setDiameterNonNegativeTest() {
+      Quatrefoil ex = new Quatrefoil("Example", 3.5);
+      ex.setDiameter(4);
+      Assert.assertEquals("Failed to setDiameter - non-negative",
+         true, ex.setDiameter(4));
+   }
+   
+    /** Tests set diameter method with a negative entry. */
+   @Test public void setDiameterNegativeTest() {
+      Quatrefoil ex = new Quatrefoil("Example", 3.5);
+      ex.setDiameter(-3.5);
+      Assert.assertEquals("Failed to setDiameter - negative",
+         false, ex.setDiameter(-3));
+   }
+   
+   /** Tests the toString method. */
+   @Test public void toStringTest() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      String example1 = "Quatrefoil \"Small Example\" with"
+         + " diameter 3.5 inches has:\n\tperimeter = 10.996 inches (or "
+         + "0.916 feet)\n\tarea = 7.873 square inches (or "
+         + "0.055 square feet)";
+      Assert.assertEquals(example1, ex1.toString());
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      String example2 = "Quatrefoil \"Medium Example\" with"
+         + " diameter 38.44 inches has:\n\tperimeter = 120.763 inches (or "
+         + "10.064 feet)\n\tarea = 949.674 square inches (or 6.595"
+         + " square feet)";
+      Assert.assertEquals(example2, ex2.toString());
+      Quatrefoil ex3 = new Quatrefoil("Large Example", 111.4);
+      String example3 = "Quatrefoil \"Large Example\" with"
+         + " diameter 111.4 inches has:\n\tperimeter = 349.973 inches (or "
+         + "29.164 feet)\n\tarea = 7,975.87 square inches (or 55.388"
+         + " square feet)";
+      Assert.assertEquals(example3, ex3.toString());
+   }
+   
+   /** Tests the getCount method. */
+   @Test public void getCountTest() {
+      int start = Quatrefoil.getCount();
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Assert.assertEquals(start + 1, Quatrefoil.getCount());
+      Quatrefoil ex2 = new Quatrefoil("Medium Example", 38.44);
+      Assert.assertEquals(start + 2, Quatrefoil.getCount());
+   }
+   
+   /** Tests the resetCount method. */
+   @Test public void resetCountTest() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil.resetCount();
+      Assert.assertEquals(0, Quatrefoil.getCount());
+   }
+   
+   /** Tests the equals method. */
+   @Test public void equalsTest() {
+      Quatrefoil main = new Quatrefoil("Small Example", 3.5);
+      Quatrefoil lowerCase = new Quatrefoil("small example", 3.5);
+      Quatrefoil diffLabel = new Quatrefoil("bad example", 3.5);
+      Quatrefoil diffDiameter = new Quatrefoil("small example", 4);
+      ArrayList<Integer> notIt = new ArrayList<Integer>();
+      Assert.assertEquals(true, main.equals(lowerCase));
+      Assert.assertEquals(false, main.equals(diffLabel));
+      Assert.assertEquals(false, main.equals(diffDiameter));
+      Assert.assertEquals(false, main.equals(notIt));
+   }
+   
+   /** Tests the hashCode method. */
+   @Test public void hashCodeTest() {
+      Quatrefoil ex1 = new Quatrefoil("Small Example", 3.5);
+      Assert.assertEquals(0, ex1.hashCode());
+   }
+   
+   /** Tests the compareTo method for 0. */
+   @Test public void compareToTest1() {
+      Quatrefoil ex = new Quatrefoil("Example", 3);
+      Quatrefoil ex2 = new Quatrefoil("Example 2", 3);
+      Assert.assertEquals(0, ex.compareTo(ex2));
+   }
+   
+   /** Tests the compareTo method for -1. */
+   @Test public void compareToTest2() {
+      Quatrefoil ex = new Quatrefoil("Example", 2);
+      Quatrefoil ex2 = new Quatrefoil("Example 2", 3);
+      Assert.assertEquals(-1, ex.compareTo(ex2));
+   }
+   
+   /** Tests the compareTo method for 1. */
+   @Test public void compareToTest3() {
+      Quatrefoil ex = new Quatrefoil("Example", 3);
+      Quatrefoil ex2 = new Quatrefoil("Example 2", 2);
+      Assert.assertEquals(1, ex.compareTo(ex2));
+   }
+}
