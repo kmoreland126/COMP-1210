@@ -1,0 +1,59 @@
+/**
+* Simple program to hold an array of InventoryItem objects.
+*
+* Activity 10
+* @author Kate Moreland - Fundamentals of Computing 1 - COMP1210-001
+* @version 4-10-23
+*/
+public class ItemsList {
+
+   // Instance variables.
+   private InventoryItem[] inventory;
+   private int count;
+   
+   /**
+   * ItemsList constructor.
+   */
+   public ItemsList() {
+      inventory = new InventoryItem[20];
+      count = 0;
+   }
+   
+   /** Add items to the list.
+   * @param itemIn item
+   */
+   public void addItem(InventoryItem itemIn) {
+      inventory[count] = itemIn;
+      count++;
+   }
+   
+   /**
+   * Calculates the total of the inventory.
+   * @return return
+   * @param electronicsSurcharge double
+   */
+   public double calculateTotal(double electronicsSurcharge) {
+      double total = 0;
+      for (int i = 0; i < count; i++) {
+         if (inventory[i] instanceof ElectronicsItem) {
+            total += inventory[i].calculateCost() + electronicsSurcharge;
+         }
+         else {
+            total += inventory[i].calculateCost();
+         }
+      }
+      return total;
+   }
+   
+   /**
+   * String to string.
+   * @return return
+   */
+   public String toString() {
+      String output = "All inventory:\n\n";
+      for (int i = 0; i < count; i++) {
+         output += inventory[i] + "\n";
+      }
+      return output;
+   }
+}
